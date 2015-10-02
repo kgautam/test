@@ -1,0 +1,119 @@
++ tee /dev/tty8
+++ date
++ echo 'Fri Oct  2 04:51:44 UTC 2015: Beginning pre script...'
+Fri Oct  2 04:51:44 UTC 2015: Beginning pre script...
++ echo 'The /proc/cmdline....'
++ tee /dev/tty8
+The /proc/cmdline....
++ cat /proc/cmdline
++ tee /dev/tty8
+initrd=initrd.img ks=http://172.25.254.250/ks/foundation.ks repo=http://172.25.254.250/rhel7.0/x86_64/dvd ks.device=bootif gateway=172.25.254.254 dns=172.25.254.250 netmask=255.255.255.0 ip=172.25.254.1 RHT_ENROLLMENT=1 BOOTIF=01-a4-1f-72-81-11-e7 BOOT_IMAGE=vmlinuz 
++ echo RHT_VENUE=ilt
++ cat /proc/cmdline
++ grep -o 'RHT_ENROLLMENT=[0-9]*'
++ ROLE=foundation
++ egrep -i build /proc/cmdline
++ echo RHT_ROLE=foundation
++ COURSE=
++ egrep -i '(rh[ds]?|jb|cl)[0-9]{1,3}' /proc/cmdline
+++ ls '/run/install/isodir/manifests/-*.icmf'
++ echo 'Invalid course  specified'
++ tee /dev/tty8
+Invalid course  specified
++ COURSE=
++ echo RHT_COURSE=
++ echo RHT_TITLE=
++ echo RHT_VMS=
++ echo RHT_MAXSTATIONS=20
++ source /tmp/rht
+++ RHT_VENUE=ilt
+++ RHT_ENROLLMENT=1
+++ RHT_ROLE=foundation
+++ RHT_COURSE=
+++ RHT_TITLE=
+++ RHT_VMS=
+++ RHT_MAXSTATIONS=20
++ [[ 1 -eq 0 ]]
++ RHTINST_MOUNT=/content
++ RHEL_RELEASE=rhel7.0
++ RHELH_TREE=rhel7.0/x86_64
++ cat
++ echo RHT_VMTREE=rhel7.0/x86_64
++ egrep -i LABEL=RHTINST /proc/cmdline
++ echo RHT_INSTALLSOURCE=pxe
++ source /tmp/rht-ksvars
+++ COURSE=
+++ RHTINST_MOUNT=/content
+++ RHEL_RELEASE=rhel7.0
+++ RHELH_TREE=rhel7.0/x86_64
+++ RHT_INSTALLSOURCE=pxe
++ touch /tmp/rht-packages
+++ ls /sys/block
+++ grep -v '[0-9]$'
++ CANDIDATES=sda
+++ blkid -t LABEL=RHTINST
+++ sed -e 's:^/dev/::' -e 's/[0-9].*//'
++ SRCDISK=
++ for d in '$CANDIDATES'
++ grep -q 1 /sys/block/sda/removable
++ '[' sda = '' ']'
++ MAINDISK=sda
++ break
++ echo 'RHT: Using sda as primary disk'
++ tee /dev/tty8
+RHT: Using sda as primary disk
++ echo 'RHT: Using  as source disk'
++ tee /dev/tty8
+RHT: Using  as source disk
++ echo MAINDISK=sda
++ cat
++ '[' 1 -ne 0 ']'
++ N=1
++ ip a
++ grep '^[23]:'
+2: p2p2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
+3: wlp3s0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN qlen 1000
++ ip a
++ grep -q '^2:.*:.*state UP'
+++ ip a
+++ sed -n -e '/^2:.*:/s/2:[ \t]*\(.*\):.*/\1/p'
++ NIC1=p2p2
+++ ip a
+++ sed -n -e '/^3:.*:/s/3:[ \t]*\(.*\):.*/\1/p'
++ NIC2=wlp3s0
++ echo NIC1=p2p2
++ echo NIC2=wlp3s0
++ NICACTIVATE=
++ [[ pxe = \c\d\r\o\m ]]
++ cat
++ '[' -n wlp3s0 ']'
++ '[' 1 -eq 0 ']'
++ cat
++ '[' 1 -ne 0 ']'
++ echo 'Adding reboot to instruction list...'
++ tee /dev/tty8
+Adding reboot to instruction list...
++ cat
++ '[' 1 -eq 0 ']'
++ echo 'Downloading keyboard, lang, and timezone...'
++ tee /dev/tty8
+Downloading keyboard, lang, and timezone...
++ wget -O /tmp/rht-locale http://172.25.254.250/ks/rht-locale
++ tee /dev/tty8
+--2015-10-02 04:51:44--  http://172.25.254.250/ks/rht-locale
+Connecting to 172.25.254.250:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 86
+Saving to: '/tmp/rht-locale'
+
+     0K                                                       100% 21.4M=0s
+
+2015-10-02 04:51:44 (21.4 MB/s) - '/tmp/rht-locale' saved [86/86]
+
+++ grep keyboard /tmp/rht-locale
++ cat /tmp/rht-locale
++ '[' 1 -eq 0 ']'
++ tee /dev/tty8
+++ date
++ echo 'Fri Oct  2 04:51:44 UTC 2015: Pre script complete.'
+Fri Oct  2 04:51:44 UTC 2015: Pre script complete.
